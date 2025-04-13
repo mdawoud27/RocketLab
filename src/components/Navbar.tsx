@@ -26,17 +26,19 @@ export function Navbar() {
 
   const handleClick = (href: string) => {
     setIsOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      const navHeight = 80; // Height of the navbar
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        const navHeight = 80; // Height of the navbar
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navHeight;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }, 100); // Small delay to ensure the menu closes first on mobile
   };
 
   return (
@@ -120,7 +122,7 @@ export function Navbar() {
                       e.preventDefault();
                       handleClick(item.href);
                     }}
-                    className="text-gray-300 hover:text-white transition-colors py-2"
+                    className="text-gray-300 hover:text-white transition-colors py-2 w-full block"
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: index * 0.1 }}
